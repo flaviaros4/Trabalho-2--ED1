@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+
 #include "clientes.h"
 #include "filas.h"
 #include "atendimento.h"
@@ -9,6 +11,14 @@ int main()
 
     Estatisticas estatisticas;
     inicializarEstatisticas(&estatisticas);
+
+    Fila filaComum;
+    Fila filaPreferencial;
+
+    inicializarFila(&filaComum);
+    inicializarFila(&filaPreferencial);
+
+    Cliente *clienteCadastrado = NULL;
 
     do
     {
@@ -27,38 +37,91 @@ int main()
         switch(opcao)
         {
             case 1:
-                printf("Cadastrar cliente\n");
+            {
+                if (clienteCadastrado != NULL)
+                {
+                    free(clienteCadastrado);
+                }
+
+                clienteCadastrado = cadastrar_cliente();
                 break;
+            }
 
             case 2:
-                printf("Inserir na fila\n");
+            {
+                if (clienteCadastrado == NULL)
+                {
+                    printf("Nenhum cliente cadastrado.\n");
+                    break;
+                }
+
+                if (clienteCadastrado->tipo == 0)
+                {
+                    enfileirar(&filaComum, *clienteCadastrado);
+                    printf("Cliente inserido na fila comum.\n");
+                }
+                else
+                {
+                    enfileirar(&filaPreferencial, *clienteCadastrado);
+                    printf("Cliente inserido na fila preferencial.\n");
+                }
+
+                free(clienteCadastrado);
+                clienteCadastrado = NULL;
+
                 break;
+            }
 
             case 3:
-                printf("Atender cliente\n");
+            {
+                atenderProximo(
+                    &filaComum,
+                    &filaPreferencial,
+                    &estatisticas
+                );
                 break;
+            }
 
             case 4:
-                printf("Exibir filas\n");
+            {
+                exibirFila(&filaComum, "FILA COMUM");
+                exibirFila(&filaPreferencial, "FILA PREFERENCIAL");
                 break;
+            }
 
             case 5:
+            {
                 listarAtendidos();
                 break;
+            }
 
             case 6:
+            {
                 exibirEstatisticas(estatisticas);
                 break;
+            }
 
             case 0:
+            {
                 printf("Encerrando sistema...\n");
                 break;
+            }
 
             default:
+            {
                 printf("Opcao invalida!\n");
+            }
         }
 
     } while(opcao != 0);
+
+    liberarFila(&filaComum);
+    liberarFila(&filaPreferencial);
+
+    if (clienteCadastrado != NULL)
+    {
+        free(clienteCadastrado);
+    }
 
     return 0;
 }

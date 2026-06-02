@@ -71,8 +71,36 @@ void listarAtendidos()
 };
 
 void atenderProximo(Fila *filaComum, Fila *filaPreferencial, Estatisticas *estatisticas) {
+    static int comunsSeguidos = 0;
+    Cliente cliente;
 
-};
+    if (filaVazia(filaComum) && filaVazia(filaPreferencial)) {
+        printf("Nenhum cliente nas filas.\n");
+        return;
+    }
+
+    if (!filaVazia(filaPreferencial) && comunsSeguidos >= 2) {
+        cliente = desenfileirar(filaPreferencial);
+        comunsSeguidos = 0;
+    } else if (!filaVazia(filaComum)) {
+        cliente = desenfileirar(filaComum);
+        comunsSeguidos++;
+    } else {
+        cliente = desenfileirar(filaPreferencial);
+        comunsSeguidos = 0;
+    }
+
+    printf(
+        "Cliente atendido: %s | %s | %d itens | Tempo: %d segundos\n",
+        cliente.nome,
+        cliente.tipo == 0 ? "Comum" : "Preferencial",
+        cliente.qtd_itens,
+        calcularTempo(cliente)
+    );
+
+    registrarAtendimento(cliente, estatisticas);
+    adicionarAtendido(cliente);
+}
 
 void exibirEstatisticas(Estatisticas estatisticas)
 {
