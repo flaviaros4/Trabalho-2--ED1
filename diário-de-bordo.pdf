@@ -10,19 +10,19 @@ Flávia: Encarregou-se do módulo de atendimento e das estatísticas, criando a 
 
 Relatos Semanais do Processo de Desenvolvimento
 
-Semana 1: Estruturação e Cadastros
+Estruturação e Cadastros
 
 Ações: O grupo fez o planejamento inicial e dividiu os arquivos do projeto. A Ana desenvolveu completamente a função responsável por cadastrar os clientes.
 
 Dificuldades e Soluções: Houve dificuldade inicial em ler nomes compostos (com espaços) na linguagem C. A Ana resolveu esse problema ajustando a máscara de formatação da função scanf, evitando o uso de funções defasadas.
 
-Semana 2: Estrutura de Filas e Alternância
+Estrutura de Filas e Alternância
 
 Ações: A Joyce programou as funções principais das filas (enfileirar e desenfileirar). Em paralelo, a Flávia construiu a base do laço de repetição que simula o atendimento.
 
 Dificuldades e Soluções: A Joyce enfrentou erros de execução (falha de segmentação) ao tentar acessar dados de uma fila que ainda estava vazia. A solução foi implementar uma validação simples que checa se a fila tem elementos antes de tentar remover ou exibir um cliente.
 
-Semana 3: Integração, Estatísticas e Reflexões
+Integração, Estatísticas e Reflexões
 
 Ações: A Flávia finalizou a integração do sistema no menu principal, adicionando os cálculos para exibir o tempo médio de atendimento e o total de itens. O grupo também se reuniu para gravar a execução do sistema via console.
 
