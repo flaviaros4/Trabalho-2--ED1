@@ -13,3 +13,18 @@ gcc main.c clientes.c filas.c atendimento.c -o simulador_supermercado
 
 # Execução
 ./simulador_supermercado
+
+## Vídeo de Demonstração
+
+A demonstração completa da execução do sistema pode ser acessada pelo link abaixo:
+
+**Vídeo:** https://youtu.be/UBjeva2ESPo
+
+O vídeo apresenta todas as funcionalidades implementadas, incluindo:
+
+* Cadastro de clientes;
+* Inserção nas filas comum e preferencial;
+* Atendimento com alternância entre filas;
+* Exibição das filas;
+* Listagem de clientes atendidos;
+* Geração das estatísticas finais.
